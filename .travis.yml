@@ -30,10 +30,10 @@ after_success:
 #     access_key_id: "$AWS_ACCESS_KEY"
 #     secret_access_key: "$AWS_SECRET_KEY"
 #     region: "ap-southeast-2"
-#     app: "docker-101"
-#     env: "Docker101-env"
+#     app: "fibonacci-docker"
+#     env: "FibonacciDocker-env"
 #     bucket_name: "elasticbeanstalk-ap-southeast-2-111244320075"
-#     bucket_path: "docker-101"
+#     bucket_path: "fibonacci-docker"
 #     on: 
 #         branch: master
 
