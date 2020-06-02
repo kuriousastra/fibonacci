@@ -25,18 +25,19 @@ after_success:
   - docker push kuriousastra/fibonacci-server
   - docker push kuriousastra/fibonacci-worker
 
-# deploy:
-#     provider: elasticbeanstalk
-#     access_key_id: "$AWS_ACCESS_KEY"
-#     secret_access_key: "$AWS_SECRET_KEY"
-#     region: "ap-southeast-2"
-#     app: "fibonacci-docker"
-#     env: "FibonacciDocker-env"
-#     bucket_name: "elasticbeanstalk-ap-southeast-2-111244320075"
-#     bucket_path: "fibonacci-docker"
-#     on: 
-#         branch: master
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    access_key_id: "$AWS_ACCESS_KEY"
+    secret_access_key: "$AWS_SECRET_KEY"
+    region: "ap-southeast-2"
+    app: "fibonacci-docker"
+    env: "FibonacciDocker-env"
+    bucket_name: "elasticbeanstalk-ap-southeast-2-111244320075"
+    bucket_path: "fibonacci-docker"
+    on: 
+        branch: master
 
 
-# after_deploy:
-#   - echo "done deploying"
+after_deploy:
+  - echo "done deploying"
