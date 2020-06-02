@@ -16,15 +16,15 @@ after_success:
   - docker build -t kuriousastra/fibonacci-server ./server
   - docker build -t kuriousastra/fibonacci-worker ./worker
 
-#Log in to Docker CLI
-- echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Log in to Docker CLI
+  - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-#Take those images and push it to Docker Hub. 
-- docker push kuriousastra/fibonacci-client
-- docker push kuriousastra/fibonacci-nginx
-- docker push kuriousastra/fibonacci-server
-- docker push kuriousastra/fibonacci-worker
-
+  #Take those images and push it to Docker Hub. 
+  - docker push kuriousastra/fibonacci-client
+  - docker push kuriousastra/fibonacci-nginx
+  - docker push kuriousastra/fibonacci-server
+  - docker push kuriousastra/fibonacci-worker
+  
 # deploy:
 #     provider: elasticbeanstalk
 #     access_key_id: "$AWS_ACCESS_KEY"
