@@ -1,0 +1,42 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+  before_install:
+  - docker build -t kuriousastra/fibonacci-react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true kuriousastra/fibonacci-react-test npm test
+
+after_success:
+  - docker build -t kuriousastra/fibonacci-client ./client
+  - docker build -t kuriousastra/fibonacci-nginx  ./nginx
+  - docker build -t kuriousastra/fibonacci-server ./server
+  - docker build -t kuriousastra/fibonacci-worker ./worker
+
+#Log in to Docker CLI
+- echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+#Take those images and push it to Docker Hub. 
+- docker push kuriousastra/fibonacci-client
+- docker push kuriousastra/fibonacci-nginx
+- docker push kuriousastra/fibonacci-server
+- docker push kuriousastra/fibonacci-worker
+
+# deploy:
+#     provider: elasticbeanstalk
+#     access_key_id: "$AWS_ACCESS_KEY"
+#     secret_access_key: "$AWS_SECRET_KEY"
+#     region: "ap-southeast-2"
+#     app: "docker-101"
+#     env: "Docker101-env"
+#     bucket_name: "elasticbeanstalk-ap-southeast-2-111244320075"
+#     bucket_path: "docker-101"
+#     on: 
+#         branch: master
+
+
+# after_deploy:
+#   - echo "done deploying"
